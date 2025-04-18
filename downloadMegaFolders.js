@@ -4,7 +4,7 @@ const { File } = require('megajs');
 
 // Folder links and decryption keys
 const folders = [
-  { id: 14, link: 'https://mega.nz/folder/MK9kEK4C', key: '7mbF_SsPTvvDX6Q9v0r7mg' },
+EK4C', key: '7mbF_SsPTvvDX6Q9v0r7mg' },
   { id: 12, link: 'https://mega.nz/folder/wKNmTCbJ', key: 'RSbn3QYSDblE81GMjU6WVg' },
   { id: 8, link: 'https://mega.nz/folder/BPkXQQLK', key: 'zzpB8GJJW9rpHwSpfVhHxg' },
   { id: 13, link: 'https://mega.nz/folder/YPFknAgT', key: 'MAmycCjXWizfi1-aVjChZw' },
@@ -51,12 +51,12 @@ const processFolder = async (folder, subfolderName) => {
     fs.mkdirSync(subfolderPath);
   }
 
-  for (const [name, child] of Object.entries(folder.children || {})) {
-    const filePath = path.join(subfolderPath, name);
+  for (const child of Object.values(folder.children || {})) {
+    const filePath = path.join(subfolderPath, child.name); // Use child.name instead of name
 
     if (child.directory) {
       // If it's a subfolder, process it recursively
-      await processFolder(child, path.join(subfolderName, name));
+      await processFolder(child, path.join(subfolderName, child.name));
     } else {
       // If it's a file, download it with its original name
       await downloadFile(child, filePath);
