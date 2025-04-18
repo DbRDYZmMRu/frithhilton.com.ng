@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { File } = require('megajs'); // Correct import of the File class
+const { File } = require('megajs');
 
 // Folder links and decryption keys
 const folders = [
@@ -55,10 +55,10 @@ const processFolder = async (folder, subfolderName) => {
     const filePath = path.join(subfolderPath, name);
 
     if (child.directory) {
-      // If it's a subfolder, recursively process it
+      // If it's a subfolder, process it recursively
       await processFolder(child, path.join(subfolderName, name));
     } else {
-      // If it's a file, download it
+      // If it's a file, download it with its original name
       await downloadFile(child, filePath);
     }
   }
@@ -79,7 +79,7 @@ const main = async () => {
         });
       });
 
-      // Process the folder
+      // Process the folder using the corresponding subfolder name
       await processFolder(folder, id.toString());
     } catch (err) {
       console.error(`Error processing folder ${id}:`, err);
