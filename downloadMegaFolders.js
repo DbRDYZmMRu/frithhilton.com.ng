@@ -4,7 +4,7 @@ const { File } = require('megajs');
 
 // Folder links and decryption keys
 const folders = [
-EK4C', key: '7mbF_SsPTvvDX6Q9v0r7mg' },
+  { id: 14, link: 'https://mega.nz/folder/MK9kEK4C', key: '7mbF_SsPTvvDX6Q9v0r7mg' },
   { id: 12, link: 'https://mega.nz/folder/wKNmTCbJ', key: 'RSbn3QYSDblE81GMjU6WVg' },
   { id: 8, link: 'https://mega.nz/folder/BPkXQQLK', key: 'zzpB8GJJW9rpHwSpfVhHxg' },
   { id: 13, link: 'https://mega.nz/folder/YPFknAgT', key: 'MAmycCjXWizfi1-aVjChZw' },
