@@ -1,0 +1,50 @@
+name: Sync mp3 Folder from Source Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync_mp3:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # Step 1: Checkout Target Repository
+      - name: Checkout Target Repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          ref: main # Replace 'main' if your target branch is different
+
+      # Step 2: Clone Source Repository
+      - name: Clone Source Repository
+        run: |
+          git clone https://github.com/DbRDYZmMRu/web-app.git source-repo
+
+      # Step 3: Copy mp3 Folder from Source to Target
+      - name: Copy mp3 Folder
+        run: |
+          mkdir -p source-repo/mp3
+          cp -R source-repo/mp3 ./mp3
+
+      # Step 4: Configure Git User
+      - name: Configure Git User
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      # Step 5: Commit and Push Changes
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m 'Sync mp3 folder from source repository'
+            git push origin HEAD:main
+          fi
